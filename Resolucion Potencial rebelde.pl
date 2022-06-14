@@ -103,3 +103,13 @@ vivienda(sinHabitantes,10,20,0).
                 vivienda(Vivienda,Ancho,Largo,Tuneles),
                 50 < Ancho*Largo + 10*Tuneles.
                 % El salon es el ancho por el largo
+
+        % 4) Analizar la inversibilidad de los predicados, de manera de encontrar alguno de los realizados que sea totalmente inversible y otro que no. Justificar. 
+
+            % Ejemplo de un predicado NO inversible es el de `posiblesDisidentes` del punto 2a)
+            % Porque lo primero que hay que hacer es pedirle a la base de conocimientos todas las personas registradas en ella para hacer un correcto analisis de las personas posibles disidentes
+            % Si se cambiara la condicion `persona(Persona)`, del primer lugar a ultimo, todavia sí se podria pedir personas a la base de conocimientos con la condicion siguiente `tieneHabilidadSospechosa(Persona)`,pero solo trae algunas de ellas, y el analisis no seria completo.
+
+            % Otro ejemplo de predicado NO inversible es el de `viviendaSinHabitantes(Vivienda)` porque necesita primero que se validen todas las viviendas y a partir de alli,ver si existen algunas de ellas donde no haya habitantes. 
+
+            % En este caso no veo criterios inversibles porque entiendo que para que esto sea posible,en un criterio,el orden de las condiciones al moverlas de lugar,deberian hacer que el criterio devuelva siempre lo mismo cuando se la consulta por algo. 
