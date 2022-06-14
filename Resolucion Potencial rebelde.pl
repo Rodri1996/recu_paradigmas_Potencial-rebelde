@@ -27,6 +27,7 @@ leGusta('f55840c38474c1909ce742172a77a013',tiroAlBlanco).
 leGusta('42fc1cd45335ad42d603657e5d0f2682',irALaPlaza).
 leGusta('42fc1cd45335ad42d603657e5d0f2682',pelisDeGuerras).
 leGusta('2e247e2eb505c42b362e80ed4d05b078',tiroAlBlanco).
+leGusta('2e247e2eb505c42b362e80ed4d05b078',armandoBombas).
 
 % Modelamos en que cosas son talentosas las personas:
 tieneTalentoEn('912ec803b2ce49e4a541068d495ab570',armandoBombas).
@@ -44,11 +45,12 @@ viveEn('912ec803b2ce49e4a541068d495ab570',laSeverino).
 viveEn('f55840c38474c1909ce742172a77a013',comisaria48).
 viveEn('42fc1cd45335ad42d603657e5d0f2682',casaTenebrosa).
 viveEn('2e247e2eb505c42b362e80ed4d05b078',rodrisHouse).
+viveEn('2e247e2eb505c42b362e80ed4d05b078',laSeverino).
 
 % Modelamos las viviendas:
     % formato de la vivienda vivienda(nombre,ancho,largo,tuneles).
 vivienda(laSeverino,4,8,3).
-vivienda(comisaria48,5,5,3).
+vivienda(comisaria48,50,50,3).
 vivienda(casaTenebrosa,10,10,20).
 vivienda(rodrisHouse,10,20,0).
 % Se agrega la vivienda sin habitantes para ver si cuando hacemos la consulta en la consola "viviendaSinHabitantes(Vivienda)", saliera esta vivienda:
@@ -88,6 +90,16 @@ vivienda(sinHabitantes,10,20,0).
         % ii) Todos los que viven tienen al menos un gusto en común.
             habitantesTienenUnGustoEnComun(Vivienda):-
                 vivienda(Vivienda,_,_,_),
-                viveEn(Habitante,Vivienda),
                 leGusta(_,Gusto),
                 forall(viveEn(Habitante,Vivienda),leGusta(Habitante,Gusto)).
+                % VERR
+
+        %  iii) Encontrar todas las viviendas que tengan potencial rebelde. 
+            % se consideran viviendas con potencial rebelde si vive en ella algún posible disidente y su superficie supera 50 metros cuadrados, lo que se calcula sumando su salón más 10 m por cada tunel. 
+
+            viviendaPotencialRebelde(Vivienda):-
+                posiblesDisidentes(Persona),
+                viveEn(Persona,Vivienda),
+                vivienda(Vivienda,Ancho,Largo,Tuneles),
+                50 < Ancho*Largo + 10*Tuneles.
+                % El salon es el ancho por el largo
