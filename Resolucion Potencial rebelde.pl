@@ -104,6 +104,19 @@ vivienda(sinHabitantes,10,20,0).
                 50 < Ancho*Largo + 10*Tuneles.
                 % El salon es el ancho por el largo
 
+        % 3) Mostrar ejemplos de consulta y respuesta.
+            % 1) consultamos a la base de conocimiento por los posibles disidentes:
+                % En la consola si ponemos: posiblesDisidentes(Persona).
+                % Devuelve que el posible disidente es la persona con nombre: 'f55840c38474c1909ce742172a77a013'
+            
+            % 2) consultamos a la base de conocimiento por las viviendas sin habitantes:
+                % En la consola si ponemos: viviendaSinHabitantes(Vivienda)
+                % Devuelve que la vivienda sin habitantes es: sinHabitantes (una vivienda creada a proposito)
+
+            % 3) consultamos a la base de conocimiento por las viviendas con potencial rebelde:
+                 % En la consola si ponemos: viviendaPotencialRebelde(Vivienda)
+                 % Devuelve que la vivienda con potencial rebelde seria: comisaria48 
+
         % 4) Analizar la inversibilidad de los predicados, de manera de encontrar alguno de los realizados que sea totalmente inversible y otro que no. Justificar. 
 
             % Ejemplo de un predicado NO inversible es el de `posiblesDisidentes` del punto 2a)
