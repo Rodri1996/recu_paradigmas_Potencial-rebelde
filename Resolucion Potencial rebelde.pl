@@ -93,7 +93,6 @@ vivienda(sinHabitantes,10,20,0).
                 vivienda(Vivienda,_,_,_),
                 leGusta(_,Gusto),
                 forall(viveEn(Habitante,Vivienda),leGusta(Habitante,Gusto)).
-                % VERR
 
         %  iii) Encontrar todas las viviendas que tengan potencial rebelde. 
             % se consideran viviendas con potencial rebelde si vive en ella algún posible disidente y su superficie supera 50 metros cuadrados, lo que se calcula sumando su salón más 10 m por cada tunel. 
