@@ -64,7 +64,7 @@ vivienda(sinHabitantes,10,20,0).
     posiblesDisidentes(Persona):-
         persona(Persona),
         tieneHabilidadSospechosa(Persona),
-        trabajaEnAlgoConIndoleMilitar(Persona),
+        not(trabajaEnAlgoConIndoleMilitar(Persona)),    
         gustosSospechosos(Persona).
 
     tieneHabilidadSospechosa(Persona):-
@@ -75,12 +75,13 @@ vivienda(sinHabitantes,10,20,0).
         trabajaDe(Persona,AreaDeTrabajo),
         deIndoleMilitar(AreaDeTrabajo).
 
+    % Aca hago un OR en caso de que la persona no le guste nada o le gusta algo en el que es talentoso
     gustosSospechosos(Persona):-
         not(leGusta(Persona,_)).
 
     gustosSospechosos(Persona):-
-        tieneTalentoEn(Persona,Algo),
-        leGusta(Persona,Algo).
+        leGusta(Persona,Algo),
+        tieneTalentoEn(Persona,Algo).
 
     % 2) b) Detectar si en una vivienda: 
         % i) No vive nadie 
@@ -107,7 +108,7 @@ vivienda(sinHabitantes,10,20,0).
         % 3) Mostrar ejemplos de consulta y respuesta.
             % 1) consultamos a la base de conocimiento por los posibles disidentes:
                 % En la consola si ponemos: posiblesDisidentes(Persona).
-                % Devuelve que el posible disidente es la persona con nombre: 'f55840c38474c1909ce742172a77a013'
+                % Devuelve que el posible disidente es la persona con nombre: '2e247e2eb505c42b362e80ed4d05b078' (soy yo esa persona).
             
             % 2) consultamos a la base de conocimiento por las viviendas sin habitantes:
                 % En la consola si ponemos: viviendaSinHabitantes(Vivienda)
@@ -125,4 +126,25 @@ vivienda(sinHabitantes,10,20,0).
 
             % Otro ejemplo de predicado NO inversible es el de `viviendaSinHabitantes(Vivienda)` porque necesita primero que se validen todas las viviendas y a partir de alli,ver si existen algunas de ellas donde no haya habitantes. 
 
-            % En este caso no veo criterios inversibles porque entiendo que para que esto sea posible,en un criterio,el orden de las condiciones al moverlas de lugar,deberian hacer que el criterio devuelva siempre lo mismo cuando se la consulta por algo. 
+            % En este caso como criterio inversible lo veo a `gustosSospechosos(Persona)` del punto 2).Porque entiendo que para que esto sea posible,en un criterio,el orden de las condiciones al moverlas de lugar,deberian hacer que el criterio devuelva siempre lo mismo cuando se la consulta por algo. 
+            % Y en este criterio veo que para ambos casos de `gustosSospechosos(Persona)`, si se le cambia el orden a sus condiciones siguen arrojando el mismo resultado.Por ejemplo si en un 1er caso tengo el criterio
+            % `gustosSospechosos(Persona)` definido asi:
+
+                % gustosSospechosos(Persona):-
+                %     not(leGusta(Persona,_)).
+            
+                % gustosSospechosos(Persona):-
+                %     leGusta(Persona,Algo),
+                %     tieneTalentoEn(Persona,Algo).
+            
+            % Y luego los tengo definidos asi:
+                % gustosSospechosos(Persona):-
+                %     not(leGusta(Persona,_)).
+            
+                % gustosSospechosos(Persona):-
+                %     tieneTalentoEn(Persona,Algo),
+                %     leGusta(Persona,Algo).
+
+            % Arrojan el mismo resultado cuando se les consulta.Devuelve a las persoans:
+                % Persona = f55840c38474c1909ce742172a77a013 ;
+                % Persona = '2e247e2eb505c42b362e80ed4d05b078' ;
